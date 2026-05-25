@@ -1,0 +1,28 @@
+{
+  "name": "bankflow-scout",
+  "version": "1.0.0",
+  "description": "Autonomous bank statement monitor — watches a folder, categorises transactions, flags anomalies, and generates reports without manual intervention.",
+  "trigger": {
+    "type": "file_watch",
+    "path": "./documents",
+    "pattern": "*.csv",
+    "on_event": "created"
+  },
+  "actions": [
+    {
+      "name": "analyse_statement",
+      "description": "When a new CSV bank statement is dropped into the documents folder, run the BankFlow Scout agent to categorise transactions and detect anomalies",
+      "run": "python3 agent.py --once",
+      "working_dir": "."
+    }
+  ],
+  "schedule": {
+    "type": "heartbeat",
+    "interval": "30m",
+    "action": "analyse_statement"
+  },
+  "outputs": {
+    "reports_dir": "./reports",
+    "format": "plaintext"
+  }
+}
