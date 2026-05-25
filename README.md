@@ -1,45 +1,43 @@
 # BankFlow Scout
 
-An OpenClaw skill that autonomously monitors a folder for bank statement files, categorises transactions, detects anomalies, and generates a plain-English report.
+An OpenClaw agent that autonomously monitors a folder for bank statement files, categorises every transaction, detects anomalies, and generates a plain-English report — no manual review needed.
 
 Built for the DataVita OpenClaw Challenge by Induwaree De Silva.
 
 ## The problem it solves
 
-In financial operations, teams spend hours manually reviewing transaction exports looking for duplicates and unusual transfers. I saw this firsthand automating banking workflows at Pan Asia Banking Corporation. BankFlow Scout eliminates that manual step entirely.
+In financial operations, teams spend hours manually reviewing transaction exports looking for duplicates, unusual transfers, and miscategorised spend. I saw this firsthand automating banking workflows at Pan Asia Banking Corporation (PABC). BankFlow Scout eliminates that manual step entirely.
 
 Drop a CSV into the watched folder. OpenClaw does the rest.
 
 ## How OpenClaw powers this
 
-BankFlow Scout is packaged as an OpenClaw skill (bankflow-scout.yaml). OpenClaw runs as a background daemon, triggers the scan action every 30 minutes via its heartbeat scheduler, and executes the analysis agent as a shell action. The agent runs autonomously without manual intervention.
+The openclaw.json file is the heart of this project. It tells OpenClaw to watch the documents/ folder for new CSV files using a file_watch trigger, run the analysis agent automatically when a new file appears, and check for new statements every 30 minutes via a heartbeat scheduler.
+
+OpenClaw is the orchestrator. agent.py is the tool it runs. The agent operates autonomously without manual intervention.
 
 ## What it does
 
-Watches a folder for new CSV bank statement files. Parses and categorises every transaction automatically into Salary, Utilities, Transfer, Contractor, Income, and Finance. Detects duplicate transactions on the same day and suspiciously round-number transfers over 500. Generates a structured plain-English report saved to the reports folder.
+OpenClaw detects a new CSV bank statement dropped into documents/, triggers agent.py to read and parse every transaction, categorises spend automatically into Salary, Utilities, Transfer, Contractor, Income, and Finance, detects duplicate transactions and round-number transfers over 500, and saves a structured plain-English report to reports/.
 
 ## How to run it
 
 Install OpenClaw: npm install -g openclaw@latest
 
-Clone the repo: git clone https://github.com/Induwaree/bankflow-scout.git
+Clone: git clone https://github.com/Induwaree/bankflow-scout.git
 
-Set up Python: python3 -m venv venv && source venv/bin/activate && pip install watchdog pandas python-dotenv
+Setup: python3 -m venv venv && source venv/bin/activate && pip install watchdog pandas python-dotenv
 
-Run directly: python3 agent.py
+Run: openclaw run openclaw.json
 
-Install as OpenClaw skill: openclaw skills import bankflow-scout.yaml
+Then drop any CSV into documents/ and the agent generates a report in reports/ automatically.
 
-Drop a CSV into documents/ and the agent generates a report in reports/ automatically.
+A sample file with planted anomalies is at documents/sample_transactions.csv
 
-## CSV format
+## Why this matters
 
-date,description,amount,type
-2025-01-03,Salary Payment,2500.00,credit
-2025-01-05,Electricity Bill,120.50,debit
-
-A sample file is included at documents/sample_transactions.csv
+Manual transaction review is tedious and error-prone. A duplicate payment or round-number transfer can indicate fraud — but catching it means reading every row. BankFlow Scout turns that into a background process. The agent watches, thinks, and reports. Humans only get involved when something needs attention.
 
 ## Built with
 
-OpenClaw, Python 3.9, watchdog, pandas, python-dotenv
+OpenClaw, Python 3.9, watchdog, pandas
