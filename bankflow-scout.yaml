@@ -1,0 +1,35 @@
+name: bankflow-scout
+version: 1.0.0
+description: Monitors a folder for bank statement CSV files, categorises transactions, detects anomalies, and generates a plain-English report automatically.
+author: Induwaree De Silva
+
+runtime: shell
+
+triggers:
+  - type: heartbeat
+    interval: 30m
+    description: Check for new bank statement files every 30 minutes
+
+actions:
+  - name: scan
+    description: Scan documents folder for new CSV files and run analysis
+    run: |
+      cd ~/bankflow-scout
+      source venv/bin/activate
+      python3 agent.py --once
+
+  - name: report
+    description: Generate and save anomaly report
+    run: |
+      cd ~/bankflow-scout
+      ls -lt reports/ | head -5
+
+inputs:
+  - name: folder
+    description: Path to folder containing bank statement CSV files
+    default: ~/bankflow-scout/documents
+
+outputs:
+  - name: report
+    description: Plain-English transaction report with anomaly flags
+    path: ~/bankflow-scout/reports/

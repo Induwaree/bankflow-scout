@@ -1,0 +1,29 @@
+==================================================
+BANKFLOW SCOUT — TRANSACTION REPORT
+Generated: 2026-05-25 01:08:32
+File: test_1779667711.csv
+==================================================
+
+TOTAL IN:  £13,750.00
+TOTAL OUT: £15,710.50
+NET:       £-1,960.50
+
+SPEND BY CATEGORY:
+  Contractor           £2,400.00
+  Finance              £2,750.00
+  Other                £345.00
+  Transfer             £10,000.00
+  Utilities            £215.50
+
+ANOMALIES FOUND: 6
+  ⚠️  DUPLICATE: 'Salary Payment' £2500.0 on 2025-01-03
+  ⚠️  DUPLICATE: 'Contractor Payment' £1200.0 on 2025-01-15
+  ⚠️  ROUND NUMBER: 'Cash Transfer' £5000.0 on 2025-01-10
+  ⚠️  ROUND NUMBER: 'Cash Transfer' £5000.0 on 2025-01-20
+  ⚠️  ROUND NUMBER: 'Staff Bonus' £1000.0 on 2025-01-25
+  ⚠️  ROUND NUMBER: 'Staff Bonus' £1000.0 on 2025-01-26
+
+==================================================
+
+Powered by OpenClaw — autonomous agent runtime
+BankFlow Scout | github.com/Induwaree/bankflow-scout

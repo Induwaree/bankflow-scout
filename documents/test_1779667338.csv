@@ -1,0 +1,16 @@
+date,description,amount,type
+2025-01-03,Salary Payment,2500.00,credit
+2025-01-03,Salary Payment,2500.00,credit
+2025-01-05,Electricity Bill,120.50,debit
+2025-01-07,Office Supplies,45.00,debit
+2025-01-10,Cash Transfer,5000.00,debit
+2025-01-12,Internet Bill,35.00,debit
+2025-01-15,Contractor Payment,1200.00,debit
+2025-01-15,Contractor Payment,1200.00,debit
+2025-01-18,Sales Revenue,8750.00,credit
+2025-01-20,Cash Transfer,5000.00,debit
+2025-01-22,Water Bill,60.00,debit
+2025-01-25,Staff Bonus,1000.00,debit
+2025-01-26,Staff Bonus,1000.00,debit
+2025-01-28,Advertising Fee,300.00,debit
+2025-01-30,Loan Repayment,750.00,debit
